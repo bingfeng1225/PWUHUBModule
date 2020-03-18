@@ -1,0 +1,2 @@
+include ':app', ':pwuhubmodule'
+rootProject.name='PWUHUBModule'
