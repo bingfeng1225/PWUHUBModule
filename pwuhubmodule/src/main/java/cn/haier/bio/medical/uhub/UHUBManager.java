@@ -1,7 +1,5 @@
 package cn.haier.bio.medical.uhub;
 
-import cn.qd.peiwen.pwtools.EmptyUtils;
-
 public class UHUBManager {
     private UHUBSerialport serialPort;
     private static UHUBManager manager;
@@ -21,34 +19,40 @@ public class UHUBManager {
     }
 
     public void init(String path) {
-        if (EmptyUtils.isEmpty(this.serialPort)) {
+        if (this.serialPort == null) {
             this.serialPort = new UHUBSerialport();
             this.serialPort.init(path);
         }
     }
 
     public void enable() {
-        if (EmptyUtils.isNotEmpty(this.serialPort)) {
+        if (null != this.serialPort) {
             this.serialPort.enable();
         }
     }
 
     public void disable() {
-        if (EmptyUtils.isNotEmpty(this.serialPort)) {
+        if (null != this.serialPort) {
             this.serialPort.disable();
         }
     }
 
     public void release() {
-        if (EmptyUtils.isNotEmpty(this.serialPort)) {
+        if (null != this.serialPort) {
             this.serialPort.release();
             this.serialPort = null;
         }
     }
 
     public void reset() {
-        if (EmptyUtils.isNotEmpty(this.serialPort)) {
+        if (null != this.serialPort) {
             this.serialPort.reset();
+        }
+    }
+
+    public void changeListener(IUHUBListener listener) {
+        if (null != this.serialPort) {
+            this.serialPort.changeListener(listener);
         }
     }
 }
