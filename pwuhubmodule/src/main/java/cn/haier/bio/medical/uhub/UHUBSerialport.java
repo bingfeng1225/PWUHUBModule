@@ -77,6 +77,9 @@ class UHUBSerialport implements PWSerialPortListener {
 
     @Override
     public void onReadThreadReleased(PWSerialPortHelper helper) {
+        if (!this.isInitialized() || !helper.equals(this.helper)) {
+            return;
+        }
         if (null != this.listener && null != this.listener.get()) {
             this.listener.get().onUHUBPrint("UHUBSerialPort read thread released");
         }
