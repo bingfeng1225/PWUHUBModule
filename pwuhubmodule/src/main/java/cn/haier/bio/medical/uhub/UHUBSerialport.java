@@ -48,10 +48,11 @@ class UHUBSerialport implements PWSerialPortListener {
     }
 
     public void reset() {
-        if (this.isInitialized()) {
-            byte[] data = {(byte) 0xAF, (byte) 0xA6, 0x01, 0x01, 0x00, 0x57};
-            this.helper.write(data);
+        byte[] data = {(byte) 0xAF, (byte) 0xA6, 0x01, 0x01, 0x00, 0x57};
+        if (!this.isInitialized() || !this.enabled) {
+           return;
         }
+        this.helper.write(data);
     }
 
     public void changeListener(IUHUBListener listener) {
