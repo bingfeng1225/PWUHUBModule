@@ -106,7 +106,10 @@ class UHUBSerialport implements PWSerialPortListener {
     }
 
     @Override
-    public void onByteReceived(PWSerialPortHelper helper, byte[] buffer, int length) throws IOException {
-
+    public boolean onByteReceived(PWSerialPortHelper helper, byte[] buffer, int length) throws IOException {
+        if (!this.isInitialized() || !helper.equals(this.helper)) {
+            return false;
+        }
+        return true;
     }
 }
